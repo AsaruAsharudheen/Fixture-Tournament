@@ -1,8 +1,8 @@
 // src/views/Fixture.jsx
-import React, { useMemo } from "react";
-import { useTournamentData } from "../hooks/useTournamentData";
-import "./fixture.css";
-import MatchCard from "../Components/MatchCard";
+import React, { useMemo } from 'react';
+import { useTournamentData } from '../hooks/useTournamentData';
+import './fixture.css';
+import MatchCard from '../Components/MatchCard';
 
 // --- Tournament Timing Constants ---
 const START_HOUR = 21; // 9 PM (21:00)
@@ -14,7 +14,7 @@ const SLOT_DURATION = MATCH_DURATION + GAP_DURATION; // 30 minutes total
  * Helper: Calculate match start time dynamically
  * @param {number} index - match index (1-based)
  */
-const calculateStartTime = (index) => {
+const calculateStartTime = index => {
   const minutesElapsed = (index - 1) * SLOT_DURATION;
   const initialMinutes = START_HOUR * 60;
   const totalMinutes = initialMinutes + minutesElapsed;
@@ -23,8 +23,8 @@ const calculateStartTime = (index) => {
   const minute = totalMinutes % 60;
 
   const displayHour = hour > 12 ? hour - 12 : hour === 0 ? 12 : hour;
-  const ampm = hour >= 12 ? "PM" : "AM";
-  const paddedMinute = String(minute).padStart(2, "0");
+  const ampm = hour >= 12 ? 'PM' : 'AM';
+  const paddedMinute = String(minute).padStart(2, '0');
 
   return `${displayHour}:${paddedMinute} ${ampm}`;
 };
@@ -90,11 +90,11 @@ const Fixture = () => {
 
   // Re-group matches by round for structured display
   const scheduledRounds = {
-    R1: scheduledMatches.filter((m) => m.round === "R1"),
-    QF: scheduledMatches.filter((m) => m.round === "QF"),
-    SF: scheduledMatches.filter((m) => m.round === "SF"),
-    T3: scheduledMatches.filter((m) => m.round === "T3"),
-    F: scheduledMatches.filter((m) => m.round === "F"),
+    R1: scheduledMatches.filter(m => m.round === 'R1'),
+    QF: scheduledMatches.filter(m => m.round === 'QF'),
+    SF: scheduledMatches.filter(m => m.round === 'SF'),
+    T3: scheduledMatches.filter(m => m.round === 'T3'),
+    F: scheduledMatches.filter(m => m.round === 'F'),
   };
 
   // Split round-of-16 and QF for left/right visual columns
@@ -110,7 +110,7 @@ const Fixture = () => {
         ⚽ 7's Football Tournament Presented by Lucky Star Moloor 🏆
       </h1>
       <h2 className="schedule-info">
-        Starts: 9:00 PM | Match Duration: {MATCH_DURATION} mins | Gap:{" "}
+        Starts: 9:00 PM | Match Duration: {MATCH_DURATION} mins | Gap:{' '}
         {GAP_DURATION} mins
       </h2>
 
@@ -118,7 +118,7 @@ const Fixture = () => {
         {/* --- Round of 16 (Left) --- */}
         <div className="round-column">
           <h3>Round of 16 (Left)</h3>
-          {leftMatchesR1.map((match) => (
+          {leftMatchesR1.map(match => (
             <MatchCard
               key={match.id}
               match={match}
@@ -131,7 +131,7 @@ const Fixture = () => {
         {/* --- Round of 16 (Right) --- */}
         <div className="round-column">
           <h3>Round of 16 (Right)</h3>
-          {rightMatchesR1.map((match) => (
+          {rightMatchesR1.map(match => (
             <MatchCard
               key={match.id}
               match={match}
@@ -144,7 +144,7 @@ const Fixture = () => {
         {/* --- Quarter Finals (Left & Right) --- */}
         <div className="round-column">
           <h3>Quarter Finals (Left)</h3>
-          {leftMatchesQF.map((match) => (
+          {leftMatchesQF.map(match => (
             <MatchCard
               key={match.id}
               match={match}
@@ -156,7 +156,7 @@ const Fixture = () => {
 
         <div className="round-column right-aligned">
           <h3>Quarter Finals (Right)</h3>
-          {rightMatchesQF.map((match) => (
+          {rightMatchesQF.map(match => (
             <MatchCard
               key={match.id}
               match={match}
@@ -169,7 +169,7 @@ const Fixture = () => {
         {/* --- Semi Finals, 3rd Place, Final --- */}
         <div className="round-column center-aligned">
           <h3>Semi Finals</h3>
-          {scheduledRounds.SF.map((match) => (
+          {scheduledRounds.SF.map(match => (
             <MatchCard
               key={match.id}
               match={match}
@@ -182,7 +182,7 @@ const Fixture = () => {
           {scheduledRounds.T3.length > 0 && (
             <div className="third-place-card">
               <h3>Third Place Match</h3>
-              {scheduledRounds.T3.map((match) => (
+              {scheduledRounds.T3.map(match => (
                 <MatchCard
                   key={match.id}
                   match={match}
@@ -197,7 +197,7 @@ const Fixture = () => {
           {scheduledRounds.F.length > 0 && (
             <div className="final-card">
               <h2>🏆 GRAND FINAL 🏆</h2>
-              {scheduledRounds.F.map((match) => (
+              {scheduledRounds.F.map(match => (
                 <MatchCard
                   key={match.id}
                   match={match}

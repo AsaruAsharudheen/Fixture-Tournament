@@ -1,51 +1,58 @@
-/* src/App.css */
-body {
-    /* High-Contrast Black/White Model */
-    background: #000000; 
-    color: #ffffff;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+/* =========================================
+   🅰 URW DIN FONT FAMILY IMPORTS
+   ========================================= */
+
+@font-face {
+  font-family: "URW DIN";
+  src: url("../assets/fonts/URW++ - URWDIN-Thin.otf") format("opentype");
+  font-weight: 100;
+  font-style: normal;
 }
 
-.app-container {
-    padding: 0;
-    margin: 0;
+@font-face {
+  font-family: "URW DIN";
+  src: url("../assets/fonts/URW++ - URWDIN-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
 }
 
-/* --- Navigation Styling --- */
-nav {
-    background-color: #111111 !important; /* Darker black */
-    padding: 15px 20px !important;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1) !important;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    border-bottom: 1px solid #333333;
+@font-face {
+  font-family: "URW DIN";
+  src: url("../assets/fonts/URW++ - URWDIN-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
 }
 
-nav button {
-    transition: background-color 0.3s, transform 0.1s;
-    font-size: 1em;
-    color: #ffffff;
-    border: 1px solid #777777;
-    background-color: #222222 !important;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
+@font-face {
+  font-family: "URW DIN";
+  src: url("../assets/fonts/URW++ - URWDIN-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
 }
 
-nav button:hover {
-    background-color: #555555 !important;
-    transform: scale(1.02);
+@font-face {
+  font-family: "URW DIN";
+  src: url("../assets/fonts/URW++ - URWDIN-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
 }
 
-/* Selected button style */
-nav button[style*="background-color: rgb(255, 255, 255)"] { 
-    background-color: #ffffff !important; 
-    color: #000000 !important;
-    border-color: #ffffff;
-    font-weight: bold;
+/* ✅ Global font apply */
+body, html, * {
+  font-family: "URW DIN", sans-serif !important;
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.main-heading {
+  font-family: "URW DIN", sans-serif;
+  font-weight: 100; /* Thin */
+}
+
+.sub-heading {
+  font-weight: 500; /* Medium */
+}
+
+.bold-text {
+  font-weight: 700; /* Bold */
 }

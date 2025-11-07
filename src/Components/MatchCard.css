@@ -1,127 +1,225 @@
-/* src/components/MatchCard.css */
-/* ==================================== */
-/* 🧩 Match Card Styling (Monochrome) */
-/* ==================================== */
+/* =========================================
+   ⚽ MATCH CARD — GLASSMORPHIC PREMIUM STYLE
+   ========================================= */
 
 .match-card {
-    background-color: #1a1a1a; 
-    padding: 12px 15px;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-    margin: 5px 0;
-    transition: all 0.2s ease-in-out;
-    border: 1px solid #444444; 
-    color: #ffffff;
+  position: relative;
+  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 20px 24px;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 440px;
+  min-height: 160px; /* ✅ Ensures all cards same height */
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  font-family: "URW DIN", sans-serif;
 }
 
-.match-card.completed {
-    border: 2px solid #dddddd; /* Lighter border for completed matches */
-    background-color: #2a2a2a; 
-    transform: translateY(-2px); 
-    box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
+.match-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 157, 0.2),
+    rgba(0, 89, 255, 0.2)
+  );
+  opacity: 0.2;
+  z-index: 0;
 }
 
-/* Header and Metadata (Includes Match Time) */
+.match-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+}
+
+/* --- Header --- */
 .match-header {
-    margin: 0 0 8px 0;
-    font-size: 0.85em;
-    color: #cccccc; 
-    font-weight: 500;
-    text-transform: uppercase;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 14px;
+  color: #d1e7ff; /* Soft icy blue */
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.25);
+  position: relative;
+  z-index: 2;
+  letter-spacing: 0.5px;
 }
 
+/* --- Main Content --- */
 .match-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 16px 20px;
+  border-radius: 16px;
+  position: relative;
+  z-index: 2;
 }
 
-/* Team Name Display */
+/* --- Team Names --- */
 .team-name {
-    font-size: 1.0em;
-    color: #ffffff;
-    flex-grow: 1; 
-    max-width: 40%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  flex: 1;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+  text-transform: uppercase;
 }
 
-/* Winner Emphasis */
+.team-name:first-child {
+  color: #2db2ff; /* Blue */
+}
+
+.team-name:last-child {
+  color: #ff4f4f; /* Red */
+}
+
 .team-name.winner {
-    font-weight: 700;
-    color: #000000; 
-    background-color: #ffffff; /* White background for winner */
-    padding: 2px 5px;
-    border-radius: 2px;
+  color: #00ffae;
+  text-shadow: 0 0 12px rgba(0, 255, 174, 0.85);
+  transform: scale(1.06);
 }
 
-/* Score Display */
+/* --- Score Display --- */
 .score-display {
-    font-weight: 900;
-    color: #aaaaaa; 
-    font-size: 1.3em;
-    margin: 0 10px;
-    flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  min-width: 65px;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.25);
 }
 
-/* Winner Banner */
-.winner-banner {
-    margin-top: 10px;
-    font-weight: 700;
-    color: #aaaaaa; 
-    text-align: center;
-    font-size: 0.9em;
-    padding: 6px;
-    background-color: #222222;
-    border-radius: 4px;
-    border: 1px dashed #aaaaaa;
+/* --- Admin Score Form --- */
+.admin-score-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
-/* --- Admin Form Specific Styles --- */
-.admin-score-form input[type="number"] {
-    width: 30px;
-    padding: 4px;
-    text-align: center;
-    border: 1px solid #777777;
-    background-color: #000000;
-    color: #ffffff;
-    border-radius: 3px;
-    font-size: 0.9em;
+.admin-score-form input {
+  width: 48px;
+  padding: 6px;
+  text-align: center;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-weight: 600;
+  color: #111;
+  background: #ffffff;
 }
 
-.admin-score-form span {
-    color: #cccccc;
+.admin-score-form .dash {
+  color: #fff;
+  font-weight: 700;
 }
 
 .admin-score-form button {
-    padding: 4px 8px;
-    background-color: #666666;
-    color: #ffffff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    font-size: 0.9em;
+  background: linear-gradient(135deg, #00ffae, #007bff);
+  color: white;
+  font-weight: 600;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.25s ease;
 }
 
-/* --- Mobile Fix: Allow Full Name Display --- */
-@media (max-width: 600px) {
-    .team-name {
-        max-width: 45%; 
-        white-space: normal; /* Allow wrapping for full name visibility */
-        text-overflow: clip; 
-        overflow: visible;
-    }
-    .match-content {
-        flex-direction: column;
-        gap: 5px;
-    }
-    .score-display, .admin-score-form {
-        order: 3; /* Move score to the bottom in mobile view */
-    }
-    .team-name {
-        max-width: 100%;
-        text-align: center;
-    }
+.admin-score-form button:hover {
+  background: linear-gradient(135deg, #00e09e, #006ae0);
+  transform: scale(1.05);
+}
+
+/* --- Winner Banner --- */
+.winner-banner {
+  margin-top: 14px;
+  background: linear-gradient(90deg, #00ffae, #007bff);
+  color: #000;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  position: relative;
+  z-index: 2;
+  animation: fadeIn 0.5s ease;
+  letter-spacing: 0.4px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Completed Match Glow --- */
+.match-card.completed {
+  border: 1.5px solid rgba(0, 255, 157, 0.5);
+  box-shadow: 0 0 20px rgba(0, 255, 157, 0.25);
+}
+
+/* ================================
+   📱 MOBILE RESPONSIVENESS
+   ================================ */
+@media (max-width: 768px) {
+  .match-card {
+    max-width: 92%;
+    min-height: 150px;
+    padding: 16px;
+  }
+
+  .match-header {
+    font-size: 1rem;
+  }
+
+  .match-content {
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .team-name {
+    font-size: 1rem;
+  }
+
+  .score-display {
+    font-size: 1.1rem;
+    padding: 8px 14px;
+  }
+
+  .winner-banner {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .match-card {
+    min-height: 140px;
+  }
+
+  .match-header {
+    font-size: 0.9rem;
+  }
+
+  .team-name {
+    font-size: 0.95rem;
+  }
+
+  .score-display {
+    font-size: 1rem;
+    min-width: 55px;
+  }
 }

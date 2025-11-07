@@ -1,203 +1,272 @@
-/* src/views/Fixture.css */
+/* src/views/fixture.css */
 /* ==================================== */
-/* 🏆 Fixture/Bracket Layout Styling (Monochrome & Premium) */
+/* 🏆 Fixture / Bracket Layout Styling (Responsive + Backgrounds) */
 /* ==================================== */
 
 .fixture-wrapper {
-    padding: 40px 10px;
-    min-height: calc(100vh - 60px); 
-    background: #000000;
+  padding: 40px 10px;
+  min-height: calc(100vh - 60px);
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+    url('/background3.jpg') no-repeat center center fixed,
+    url('/background.jpg') no-repeat center center fixed;
+  /* background-size: cover, cover, cover; */
+  /* background-blend-mode: overlay; */
+  color: #ffffff;
+  /* font-family: "Poppins", sans-serif; */
+  position: absolute;
 }
 
+/* --- Header --- */
 .fixture-header {
-    color: #ffffff;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3);
-    font-size: 2.5em;
-    padding: 10px 0;
-    border-bottom: 2px solid #555555;
-    text-transform: uppercase;
-    text-align: center;
+  color: #ffffff;
+  text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3);
+  font-size: 2.3em;
+  padding: 10px 0;
+  border-bottom: 2px solid #555555;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .schedule-info {
-    color: #cccccc;
-    font-size: 1.1em;
-    margin-bottom: 40px;
-    font-weight: normal;
-    text-align: center;
+  color: #cccccc;
+  font-size: 1.1em;
+  margin-bottom: 40px;
+  font-weight: normal;
+  text-align: center;
 }
 
 /* --- The Main Bracket Container --- */
 .fixture-container {
-    display: flex;
-    justify-content: center; 
-    gap: 40px; 
-    max-width: 1500px; 
-    margin: 0 auto;
-    padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 20px 0;
+  flex-wrap: nowrap;
 }
 
+/* --- Columns --- */
 .round-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around; 
-    flex-shrink: 0;
-    width: 20%; 
-    min-width: 280px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-shrink: 0;
+  width: 20%;
+  min-width: 280px;
 }
 
-/* Column 2 (QF Left) and 4 (QF Right) need padding-top for vertical alignment */
 .round-column:nth-child(2),
 .round-column:nth-child(4) {
-    padding-top: 80px; 
-    justify-content: flex-start;
+  padding-top: 80px;
+  justify-content: flex-start;
 }
 
-/* Column 3 (Center) needs unique padding and alignment */
 .round-column.center-aligned {
-    width: 15%; 
-    min-width: 200px;
-    padding-top: 0;
-    justify-content: flex-start;
-    align-items: center; 
+  width: 15%;
+  min-width: 200px;
+  padding-top: 0;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-
+/* --- Headings --- */
 .round-column h3 {
-    text-align: center;
-    margin-bottom: 25px;
-    padding-bottom: 10px;
-    color: #ffffff; 
-    border-bottom: 3px solid #777777; 
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-left: 40px;
+  text-align: center;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  color: #ffffff;
+  border-bottom: 3px solid #777777;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-left: 40px;
 }
 
+/* --- Group Spacing --- */
 .r1-group {
-    display: flex;
-    flex-direction: column;
-    gap: 40px; 
-    margin-bottom: 0; 
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 0;
 }
 
-/* Space out Semi-Final matches */
 .sf-group {
-    gap: 80px; 
-    margin-bottom: 50px; 
-    margin-left: 35px;
+  gap: 80px;
+  margin-bottom: 50px;
+  margin-left: 35px;
 }
 
-/* --- Third Place Match Styling --- */
+/* --- Third Place --- */
 .third-place-card {
-    border: 3px solid #aaaaaa; 
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-    background-color: #111111; 
-    align-self: center;
-    margin: 20px 0; 
-    width: 100%;
-    margin-left: 35px;
+  border: 3px solid #aaaaaa;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+  background-color: rgba(17, 17, 17, 0.85);
+  align-self: center;
+  margin: 20px 0;
+  width: 100%;
+  margin-left: 35px;
 }
 
-.third-place-card h2 {
-    color: #aaaaaa; 
-    margin-top: 0;
-    margin-bottom: 10px; 
-    font-size: 1.4em;
-    text-align: center;
-    text-shadow: none;
+.third-place-card h3 {
+  color: #aaaaaa;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.3em;
+  text-align: center;
 }
 
-/* --- Final Match Card Styling --- */
+/* --- Final --- */
 .final-card {
-    border: 4px solid #ffffff; 
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
-    background-color: #222222; 
-    align-self: center; 
-    margin-top: 40px; 
-    width: 100%;
-    margin-left: 35px;
+  border: 4px solid #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.25);
+  background-color: rgba(34, 34, 34, 0.9);
+  align-self: center;
+  margin-top: 40px;
+  width: 100%;
+  margin-left: 35px;
 }
 
 .final-card h2 {
-    color: #ffffff;
-    margin-top: 0;
-    font-size: 1.8em;
-    text-shadow: none;
+  color: #ffffff;
+  margin-top: 0;
+  font-size: 1.7em;
+  text-align: center;
 }
 
-
 /* ==================================== */
-/* 📱 Mobile Responsiveness */
+/* 📱 Responsive Breakpoints */
 /* ==================================== */
 
+/* --- Medium (Tablets / Small Laptops) --- */
 @media (max-width: 1200px) {
-    .fixture-container {
-        gap: 20px;
-        flex-wrap: wrap; 
-    }
+  .fixture-container {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
 
-    .round-column {
-        min-width: 48%; 
-        width: 48%;
-    }
+  .round-column {
+    min-width: 45%;
+    width: 45%;
+  }
 
-    /* Override padding for wrapping columns */
-    .round-column:nth-child(2),
-    .round-column:nth-child(4) {
-        padding-top: 0; 
-        justify-content: flex-start;
-    }
+  .round-column:nth-child(2),
+  .round-column:nth-child(4) {
+    padding-top: 0;
+    justify-content: flex-start;
+  }
 
-    /* Center column takes full width and is pushed to the bottom */
-    .round-column.center-aligned {
-        width: 90%;
-        min-width: 90%;
-        order: 10; 
-        padding-top: 20px;
-        margin-top: 20px;
-        border-top: 2px dashed #444444;
-    }
+  .round-column.center-aligned {
+    width: 90%;
+    min-width: 90%;
+    order: 10;
+    padding-top: 20px;
+    margin-top: 30px;
+    border-top: 2px dashed #444444;
+  }
+
+  .fixture-header {
+    font-size: 1.9em;
+  }
+
+  .schedule-info {
+    font-size: 1em;
+  }
 }
 
+/* --- Mobile (Phones) --- */
 @media (max-width: 768px) {
-    .fixture-container {
-        flex-direction: column; 
-        gap: 20px;
-    }
-    
-    .round-column {
-        width: 100%;
-        min-width: 100%;
-        padding-top: 0 !important; 
-        order: initial !important; 
-    }
-    
-    /* ENFORCING MOBILE SEQUENTIAL ORDER */
-    /* Column 1: R1 Left Side -> Order 1 */
-    .fixture-container > div:nth-child(1) { order: 1; } 
-    /* Column 5: R1 Right Side -> Order 2 */
-    .fixture-container > div:nth-child(5) { order: 2; } 
-    /* Column 2: QF Left Side -> Order 3 */
-    .fixture-container > div:nth-child(2) { order: 3; } 
-    /* Column 4: QF Right Side -> Order 4 */
-    .fixture-container > div:nth-child(4) { order: 4; } 
-    /* Column 3: Center (SF, T3, F) -> Order 5 */
-    .fixture-container > div:nth-child(3) { order: 5; } 
+  .fixture-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
 
-    .r1-group, .sf-group {
-        gap: 20px;
-    }
-    .fixture-header {
-        font-size: 1.2em;
-        padding-bottom: 50px;
-    }
-    .schedule-info {
-        font-size: 1em;
-    }
+  .round-column {
+    width: 100%;
+    min-width: 100%;
+    padding-top: 0 !important;
+    order: initial !important;
+    align-items: center;
+  }
+
+  /* Enforcing readable order */
+  .fixture-container > div:nth-child(1) { order: 1; }  /* R1 Left */
+  .fixture-container > div:nth-child(5) { order: 2; }  /* R1 Right */
+  .fixture-container > div:nth-child(2) { order: 3; }  /* QF Left */
+  .fixture-container > div:nth-child(4) { order: 4; }  /* QF Right */
+  .fixture-container > div:nth-child(3) { order: 5; }  /* Center (SF, T3, F) */
+
+  .fixture-header {
+    font-size: 1.5em;
+    padding-bottom: 20px;
+    text-align: center;
+  }
+
+  .schedule-info {
+    font-size: 0.95em;
+    margin-bottom: 25px;
+  }
+
+  .round-column h3 {
+    margin-left: 0;
+    font-size: 1.1em;
+  }
+
+  .third-place-card,
+  .final-card {
+    margin-right: 30PX;
+    width: 95%;
+    border: none;
+  }
+
+  .r1-group,
+  .sf-group {
+    gap: 20px;
+  }
+}
+
+/* --- Extra Small (Under 480px) --- */
+@media (max-width: 480px) {
+  .fixture-header {
+    font-size: 1.2em;
+  }
+
+  .schedule-info {
+    font-size: 0.9em;
+  }
+
+  .round-column h3 {
+    font-size: 1em;
+  }
+
+  .third-place-card,
+  .final-card {
+    padding: 12px;
+  }
+
+  .final-card h2 {
+    font-size: 1.4em;
+  }
+}
+
+/* ==================================== */
+/* ✨ Smooth Visual Enhancements */
+/* ==================================== */
+
+.fixture-wrapper::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  filter: brightness(0.9) blur(2px);
+  z-index: -1;
 }

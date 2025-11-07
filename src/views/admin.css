@@ -1,0 +1,276 @@
+/* src/views/Admin.css */
+/* ==================================== */
+/* 🔐 Admin View Container and Login */
+/* ==================================== */
+
+.admin-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.admin-container h1 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.1);
+}
+
+/* --- Admin Controls (Reset/Logout Buttons) --- */
+.admin-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.reset-button {
+    padding: 10px 15px;
+    background-color: #555555; /* Dark gray */
+    color: white;
+    border: 1px solid #777777;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.reset-button:hover {
+    background-color: #777777;
+}
+
+.logout-button {
+    padding: 10px 15px;
+    background-color: #333333; 
+    color: white;
+    border: 1px solid #555555;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.logout-button:hover {
+    background-color: #555555;
+}
+
+/* --- Round Sections and Grid --- */
+.round-section {
+    margin: 30px 0;
+    border: 1px solid #444444;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #1a1a1a; 
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+.round-section h2 {
+    color: #ffffff;
+    border-bottom: 2px solid #777777;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+.match-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 10px 0;
+}
+
+/* --- Login Styling --- */
+.login-container {
+    padding: 50px;
+    max-width: 400px;
+    margin: 80px auto;
+    background: #111111; 
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    border: 1px solid #444444;
+}
+
+.login-form input {
+    padding: 12px;
+    border: 1px solid #777777;
+    border-radius: 4px;
+    font-size: 1em;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.login-error {
+    color: #aaaaaa; 
+    font-weight: bold;
+    margin: 0;
+}
+
+.login-form button {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.login-form button:hover {
+    background-color: #dddddd;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .match-grid {
+        grid-template-columns: 1fr;
+    }
+    .login-container {
+        margin: 40px 10px;
+        padding: 30px;
+    }
+}/* src/views/Admin.css */
+
+/* ... (Desktop/Default Styles Above) ... */
+
+/* --- Mobile Responsiveness (Max Width: 768px) --- */
+@media (max-width: 768px) {
+    /* CRITICAL: Match Grid Stacking */
+    .match-grid {
+        /* Changes the match grid from multi-column (auto-fit) 
+           to a single column (1fr), ensuring Match Cards stack 
+           vertically and remain readable on small phones/tablets. */
+        grid-template-columns: 1fr;
+    }
+    
+    /* CRITICAL: Login Container Padding/Margin */
+    .login-container {
+        /* Reduces margins and padding to prevent horizontal scrolling 
+           and maximize screen space on small devices. */
+        margin: 40px 10px;
+        padding: 30px;
+    }
+}/* src/views/Admin.css - Mobile Responsiveness */
+
+@media (max-width: 768px) {
+    /* Main container padding reduction */
+    .admin-container {
+        padding: 10px;
+    }
+
+    /* Smaller heading for better mobile fit */
+    .admin-container h1 {
+        font-size: 1.8em;
+        margin-bottom: 15px;
+    }
+    
+    /* Center and stack admin control buttons */
+    .admin-controls {
+        flex-direction: column;
+        gap: 10px; /* Reduced gap */
+        margin-bottom: 20px;
+    }
+
+    /* Make buttons full width */
+    .reset-button, .logout-button {
+        width: 100%;
+        max-width: 300px; 
+        align-self: center;
+    }
+
+    /* CRITICAL: Match Grid Stacking */
+    .match-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Smaller padding on round sections */
+    .round-section {
+        padding: 10px;
+        margin: 20px 0;
+    }
+
+    /* Login Container Padding/Margin */
+    .login-container {
+        margin: 30px 10px; 
+        padding: 20px; 
+    }
+    
+    .login-form input {
+        width: 90%; 
+        margin-top: 20px;
+    }
+    .login-form button {
+        padding: 10px; /* Slightly larger vertical padding for easy tapping */
+        font-size: 1em; /* Slightly larger text */
+        width: 50%; /* **CRITICAL: Full width button on mobile** */
+        /* box-sizing: border-box; */
+        background-color: #000000;
+        color: white;
+    }
+}/* --- Login Styling --- */
+.login-container {
+    padding: 50px;
+    max-width: 400px;
+    margin: 80px auto;
+    background: #111111; 
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    border: 1px solid #444444;
+}
+
+.login-form {
+    /* KEY CHANGE: Use flex to space elements */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Spaces inputs and button evenly */
+}
+
+.login-form input {
+    padding: 12px;
+    border: 1px solid #777777;
+    border-radius: 4px;
+    font-size: 1em;
+    background-color: #000000;
+    color: #ffffff;
+    width: 100%; /* Important for full-width look */
+    box-sizing: border-box; 
+}
+
+/* Login Button Default Style */
+.login-form button {
+    padding: 12px; 
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.2s;
+    width: 100%; /* Ensures button is full width even on desktop */
+}
+
+.login-form button:hover {
+    background-color: #dddddd;
+}/* -------------------------------------- */
+/* 📱 MOBILE RESPONSIVENESS IMPROVEMENTS */
+/* -------------------------------------- */
+@media (max-width: 768px) {
+    /* ... (Other admin styles remain the same) ... */
+
+    /* Polished Login Container Look */
+    .login-container {
+        margin: 30px 15px; /* Added slight side margin for breathing room */
+        padding: 30px 20px; /* Reduced padding for compact look */
+        max-width: 95%; 
+    }
+    
+    /* Center Title */
+    .login-container h1 {
+        font-size: 1.5em;
+        margin-bottom: 25px;
+    }
+
+    /* Polished Login Button Look (Key Change) */
+    .login-form button {
+        padding: 18px; /* Larger vertical padding for easy tapping */
+        font-size: 1.3em; /* Larger, more prominent text */
+        /* width: 100% is already set in the base style */
+        border-radius: 6px; /* Slightly rounder for modern look */
+    }
+}

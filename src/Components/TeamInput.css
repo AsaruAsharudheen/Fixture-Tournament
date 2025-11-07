@@ -1,0 +1,78 @@
+/* src/components/TeamInput.css */
+/* ==================================== */
+/* 🧩 Team Input Styling (Admin Setup) */
+/* ==================================== */
+
+.team-input-form {
+    /* Layout using CSS Grid (4 columns desktop, 2 columns tablet, 1 column mobile) */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px; 
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #1a1a1a; 
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+    border: 1px solid #444444;
+}
+
+.team-input-form h3 {
+    grid-column: 1 / -1; 
+    text-align: center;
+    color: #ffffff; 
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    border-bottom: 2px solid #777777;
+    padding-bottom: 10px;
+}
+
+/* Input Field Styling */
+.team-input-form input[type="text"] {
+    padding: 10px 12px;
+    border: 1px solid #777777;
+    border-radius: 4px;
+    font-size: 1em;
+    background-color: #000000; 
+    color: #ffffff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.team-input-form input[type="text"]:focus {
+    border-color: #ffffff; 
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+    outline: none;
+}
+
+/* Submit Button Styling */
+.setup-button {
+    grid-column: 1 / -1;
+    padding: 12px;
+    background-color: #aaaaaa; 
+    color: #000000;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.setup-button:hover {
+    background-color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 992px) {
+    .team-input-form {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+    }
+}
+
+@media (max-width: 576px) {
+    .team-input-form {
+        grid-template-columns: 1fr; /* 1 column on phones */
+        margin: 20px 10px;
+    }
+}

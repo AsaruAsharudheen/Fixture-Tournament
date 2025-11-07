@@ -1,10 +1,10 @@
 // src/views/Fixture.jsx
 import React, { useMemo } from 'react';
-import { useTournamentData } from '../hooks/useTournamentData'; // <-- CHANGE
+import { useTournamentData } from '../hooks/useTournamentData';
 import './fixture.css';
 import MatchCard from '../Components/MatchCard';
 
-// Tournament Timing Constants (unchanged)
+// Tournament Timing Constants
 const START_HOUR = 21; // 9 PM (21:00)
 const MATCH_DURATION = 20; // minutes
 const GAP_DURATION = 10; // minutes
@@ -12,12 +12,8 @@ const SLOT_DURATION = MATCH_DURATION + GAP_DURATION; // 30 minutes total
 
 // Helper to calculate time based on match index (1-based)
 const calculateStartTime = index => {
-  // Total minutes elapsed since start of Match #1
   const minutesElapsed = (index - 1) * SLOT_DURATION;
-
-  // Initial start time in minutes from midnight
   const initialMinutes = START_HOUR * 60;
-
   const totalMinutes = initialMinutes + minutesElapsed;
 
   const hour = Math.floor(totalMinutes / 60) % 24;
@@ -32,7 +28,6 @@ const calculateStartTime = index => {
 };
 
 const Fixture = () => {
-  // Use the new backend-aware hook
   const [tournamentData, , isLoading, error] = useTournamentData();
   const { teams, matches } = tournamentData;
 
@@ -216,8 +211,6 @@ const Fixture = () => {
             ))}
           </div>
         </div>
-
-        {/* The structure is set up for a dynamic bracket view */}
       </div>
     </div>
   );

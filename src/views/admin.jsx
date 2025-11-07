@@ -1,6 +1,6 @@
 // src/views/Admin.jsx
 import React, { useMemo, useState, useEffect } from 'react';
-import { useTournamentData } from '../hooks/useTournamentData'; // <-- CHANGE
+import { useTournamentData } from '../hooks/useTournamentData';
 import TeamInput from '../Components/TeamInput';
 import MatchCard from '../Components/MatchCard';
 import './admin.css';
@@ -11,8 +11,8 @@ const generateId = () => Math.random().toString(36).substring(2, 9);
 // Data structure definition
 const initialData = { teams: [], matches: [] };
 
-// API Endpoint for Login
-const LOGIN_API_URL = 'http://localhost:5000/api/auth/login';
+// API Endpoint for Login (Updated to Render deployment)
+const LOGIN_API_URL = 'https://fixture-tournament-backend.onrender.com/api/auth/login';
 
 // Bracket structure: defines which match feeds into the next match
 const BRACKET_MAP = [
@@ -79,7 +79,6 @@ const generateInitialMatches = teams => {
 };
 
 const Admin = () => {
-  // Use the new backend-aware hook
   const [tournamentData, setTournamentData, isLoading] = useTournamentData();
   const { teams, matches } = tournamentData;
 
@@ -88,7 +87,6 @@ const Admin = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  // Check for existing token on mount
   useEffect(() => {
     if (localStorage.getItem('token')) {
       setIsLoggedIn(true);
@@ -110,7 +108,6 @@ const Admin = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Store the JWT received from the server
         localStorage.setItem('token', data.token); 
         setIsLoggedIn(true);
       } else {
@@ -139,12 +136,10 @@ const Admin = () => {
   const handleTeamsSubmit = teamNames => {
     const newTeams = teamNames.map(name => ({ id: generateId(), name }));
     const newMatches = generateInitialMatches(newTeams);
-    // setTournamentData sends data to the backend
     setTournamentData({ teams: newTeams, matches: newMatches });
   };
 
   const handleScoreUpdate = (matchId, scoreA, scoreB, winnerId) => {
-    // setTournamentData handles the local state update AND sends the change to the backend
     setTournamentData(prevData => {
       let updatedMatches = prevData.matches.map(m =>
         m.id === matchId ? { ...m, scoreA, scoreB, winner_id: winnerId } : m
@@ -252,7 +247,7 @@ const Admin = () => {
         <button
           onClick={() => {
             if (window.confirm('Are you sure you want to reset the entire tournament data? This action will save the reset to the server.'))
-              setTournamentData(initialData); // Saves the reset to the server
+              setTournamentData(initialData); 
           }}
           className="reset-button"
         >

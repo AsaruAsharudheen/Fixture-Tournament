@@ -2,7 +2,7 @@
 import React, { useMemo } from "react";
 import { useTournamentData } from "../hooks/useTournamentData";
 import "./fixture.css";
-import MatchCard from "../components/MatchCard";
+import MatchCard from "../Components/MatchCard";
 
 // --- Tournament Timing Constants ---
 const START_HOUR = 21; // 9 PM (21:00)
@@ -53,7 +53,7 @@ const Fixture = () => {
   if (error) {
     return (
       <div className="fixture-placeholder error">
-        <h1>❌ Connection Error ❌</h1>
+        <h1> Connection Error </h1>
         <p>{error}</p>
         <p>Ensure the server is running and try refreshing the page.</p>
       </div>

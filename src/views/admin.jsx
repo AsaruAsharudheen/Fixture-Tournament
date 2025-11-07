@@ -1,8 +1,8 @@
 // src/views/Admin.jsx
 import React, { useMemo, useState, useEffect } from "react";
 import { useTournamentData } from "../hooks/useTournamentData";
-import TeamInput from "../components/TeamInput";
-import MatchCard from "../components/MatchCard";
+import TeamInput from "../Components/TeamInput";
+import MatchCard from "../Components/MatchCard";
 import "./admin.css";
 
 // Helper function to generate a unique ID

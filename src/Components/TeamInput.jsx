@@ -1,61 +1,36 @@
-// src/components/TeamInput.jsx
 import React, { useState } from "react";
 import "./TeamInput.css";
 
-const TEAM_COUNT = 16;
-
 const TeamInput = ({ onSubmit }) => {
-  const [teamNames, setTeamNames] = useState(Array(TEAM_COUNT).fill(""));
-  const [error, setError] = useState("");
+  const [teamNames, setTeamNames] = useState(Array(16).fill(""));
 
-  // Handle team name input
   const handleChange = (index, value) => {
-    const newNames = [...teamNames];
-    newNames[index] = value;
-    setTeamNames(newNames);
-    setError("");
+    const updated = [...teamNames];
+    updated[index] = value;
+    setTeamNames(updated);
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (teamNames.some((name) => !name.trim())) {
-      setError("⚠️ Please enter names for all 16 teams.");
-      return;
-    }
-
-    if (new Set(teamNames.map((n) => n.trim().toLowerCase())).size < TEAM_COUNT) {
-      setError("⚠️ Duplicate team names found. All names must be unique.");
-      return;
-    }
-
-    onSubmit(teamNames.map((n) => n.trim()));
+    e.preventDefault(); // ✅ Prevent browser reload
+    onSubmit(teamNames);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="team-input-form">
-      <h3>Enter {TEAM_COUNT} Team Names</h3>
-
-      <div className="team-input-grid">
-        {teamNames.map((name, index) => (
+    <form className="team-input-form" onSubmit={handleSubmit}>
+      <h2>Enter 16 Team Names</h2>
+      <div className="team-grid">
+        {teamNames.map((name, i) => (
           <input
-            key={index}
+            key={i}
             type="text"
-            placeholder={`Team ${index + 1}`}
             value={name}
-            onChange={(e) => handleChange(index, e.target.value)}
+            onChange={(e) => handleChange(i, e.target.value)}
+            placeholder={`Team ${i + 1}`}
             required
-            className="team-input-box"
           />
         ))}
       </div>
-
-      {error && <p className="team-input-error">{error}</p>}
-
-      <button type="submit" className="setup-button">
-        ✅ Setup Tournament
-      </button>
+      <button type="submit">Save Teams</button>
     </form>
   );
 };

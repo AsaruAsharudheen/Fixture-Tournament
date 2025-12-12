@@ -22,7 +22,6 @@ export default function TeamInput({ onSubmit }) {
   };
 
   return <>
-   <div className="fixture-bg">
     <form className="team-input" onSubmit={submit}>
       <h3>Enter 8 Teams (4 teams Group A, 4 teams Group B)</h3>
       <div className="team-grid">
@@ -37,7 +36,6 @@ export default function TeamInput({ onSubmit }) {
       </div>
       <button type="submit">Generate Tournament</button>
     </form>
-    </div>
     </>
   
 }

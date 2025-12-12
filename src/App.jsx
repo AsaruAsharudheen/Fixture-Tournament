@@ -1,50 +1,21 @@
-// src/App.jsx
-import React, { useState } from 'react';
-import Fixture from './views/fixture';
-import Admin from './views/admin';
-import './App.css';
+import { Routes, Route, Link } from "react-router-dom";
+import Fixture from "./pages/Fixture";
+import Admin from "./pages/Admin";
 
-const App = () => {
-  const [view, setView] = useState('fixture'); // 'fixture' or 'admin'
-
+export default function App() {
   return (
     <div className="app-container">
       <nav className="top-nav">
-        <button
-          onClick={() => setView('fixture')}
-          style={{
-            backgroundColor: view === 'fixture' ? '#ffffff' : '#222222',
-            color: view === 'fixture' ? '#000000' : '#ffffff',
-            border: '1px solid #222',
-            padding: '10px 20px',
-            cursor: 'pointer',
-            fontWeight: 'bold',
-            borderRadius: '8px 0 0 8px',
-          }}
-        >
-          View Bracket
-        </button>
-        <button
-          onClick={() => setView('admin')}
-          style={{
-            backgroundColor: view === 'admin' ? '#ffffff' : '#222222',
-            color: view === 'admin' ? '#000000' : '#ffffff',
-            border: '1px solid #222',
-            padding: '10px 20px',
-            cursor: 'pointer',
-            fontWeight: 'bold',
-            borderRadius: '0 8px 8px 0',
-          }}
-        >
-          Admin Panel
-        </button>
+        <Link to="/">Fixture</Link>
+        <Link to="/admin">Admin Panel</Link>
       </nav>
 
       <main className="content-view">
-        {view === 'fixture' ? <Fixture /> : <Admin />}
+        <Routes>
+          <Route path="/" element={<Fixture />} />
+          <Route path="/admin" element={<Admin />} />
+        </Routes>
       </main>
     </div>
   );
-};
-
-export default App;
+}

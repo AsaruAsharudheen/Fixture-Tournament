@@ -1,105 +1,51 @@
+// src/components/MatchCard.jsx
 import React, { useState } from "react";
-import "./MatchCard.css";
+import "./matchcard.css";
 
-/**
- * MatchCard Component
- * Displays individual match info, score input (for admin), and winner highlight.
- */
-const MatchCard = ({ match, teamsMap, onScoreSubmit, isAdmin }) => {
-  // Initialize scores safely
-  const [scoreA, setScoreA] = useState(match.scoreA ?? "");
-  const [scoreB, setScoreB] = useState(match.scoreB ?? "");
+const MatchCard = ({ match, teamsMap = {}, onAdminSubmit, isAdmin=false }) => {
+  const [a, setA] = useState(match.scoreA ?? "");
+  const [b, setB] = useState(match.scoreB ?? "");
+  const teamA = match.teamA_id ? teamsMap[match.teamA_id] : null;
+  const teamB = match.teamB_id ? teamsMap[match.teamB_id] : null;
+  const completed = match.scoreA !== null && match.scoreB !== null;
 
-  const teamA = teamsMap[match.teamA_id];
-  const teamB = teamsMap[match.teamB_id];
-  const winnerName = match.winner_id ? teamsMap[match.winner_id]?.name : "TBD";
-
-  const isCompleted = match.winner_id !== null && match.winner_id !== undefined;
-
-  const handleSubmit = (e) => {
+  const submit = (e) => {
     e.preventDefault();
-
-    const sA = parseInt(scoreA);
-    const sB = parseInt(scoreB);
-
-    if (isNaN(sA) || isNaN(sB)) {
-      alert("Please enter valid scores for both teams.");
-      return;
-    }
-    if (sA === sB) {
-      alert("No draws allowed — please enter a winning score.");
-      return;
-    }
-
-    if (!match.teamA_id || !match.teamB_id) {
-      alert("Teams for this match are not yet finalized.");
-      return;
-    }
-
-    const winnerId = sA > sB ? match.teamA_id : match.teamB_id;
-    onScoreSubmit(match.id, sA, sB, winnerId);
+    const sA = Number(a);
+    const sB = Number(b);
+    if (!Number.isFinite(sA) || !Number.isFinite(sB)) return alert("Enter valid scores");
+    // In knockout we might forbid draws; for group stage draws allowed. Backend uses points: win=2 draw=1
+    onAdminSubmit(match.id, sA, sB);
   };
 
-  const timeDisplay = match.startTime ? ` [${match.startTime}]` : "";
-
   return (
-    <div className={`match-card ${isCompleted ? "completed" : ""}`}>
-      <h4 className="match-header">
-        {match.round} – Match #{match.match_num}
-        {timeDisplay}
-      </h4>
-
-      <div className="match-content">
-        {/* --- Team A --- */}
-        <div
-          className={`team-name ${
-            match.winner_id === match.teamA_id ? "winner" : ""
-          }`}
-        >
+    <div className={`match-card ${completed ? "done": ""}`}>
+      <div className="match-head">{match.group || match.round || "GRP"} - #{match.match_num}</div>
+      <div className="match-body">
+        <div className={`team ${match.winner_id === match.teamA_id ? "winner" : ""}`}>
           {teamA ? teamA.name : "TBD"}
         </div>
 
-        {/* --- Score Display / Admin Input --- */}
-        {isAdmin && !isCompleted && teamA && teamB ? (
-          <form onSubmit={handleSubmit} className="admin-score-form">
-            <input
-              type="number"
-              min="0"
-              value={scoreA}
-              onChange={(e) => setScoreA(e.target.value)}
-              required
-            />
-            <span className="dash">-</span>
-            <input
-              type="number"
-              min="0"
-              value={scoreB}
-              onChange={(e) => setScoreB(e.target.value)}
-              required
-            />
-            <button type="submit">Set</button>
+        {isAdmin && !completed && teamA && teamB ? (
+          <form className="score-form" onSubmit={submit}>
+            <input type="number" min="0" value={a} onChange={(e)=>setA(e.target.value)} />
+            <span> - </span>
+            <input type="number" min="0" value={b} onChange={(e)=>setB(e.target.value)} />
+            <button type="submit">Save</button>
           </form>
         ) : (
           <div className="score-display">
-            {match.scoreA !== null && match.scoreA !== undefined
-              ? `${match.scoreA} - ${match.scoreB}`
-              : "vs"}
+            {match.scoreA != null ? `${match.scoreA} - ${match.scoreB}` : "vs"}
           </div>
         )}
 
-        {/* --- Team B --- */}
-        <div
-          className={`team-name ${
-            match.winner_id === match.teamB_id ? "winner" : ""
-          }`}
-        >
+        <div className={`team ${match.winner_id === match.teamB_id ? "winner" : ""}`}>
           {teamB ? teamB.name : "TBD"}
         </div>
       </div>
 
-      {/* --- Winner Banner --- */}
-      {isCompleted && (
-        <div className="winner-banner">🏆 Winner: {winnerName}</div>
+      {completed && match.winner_id && (
+        <div className="match-winner">Winner: {teamsMap[match.winner_id]?.name ?? "TBD"}</div>
       )}
     </div>
   );

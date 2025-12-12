@@ -13,12 +13,14 @@ export default function GroupStandings({ title, teams }) {
       <h3>{title}</h3>
       <table>
         <thead>
-          <tr><th>#</th><th>Team</th><th>Pts</th><th>GF</th><th>GA</th><th>GD</th></tr>
+          <tr>
+            <th>#</th><th>Team</th><th>Pts</th><th>GF</th><th>GA</th><th>GD</th>
+          </tr>
         </thead>
         <tbody>
           {sorted.map((t, i) => (
             <tr key={t.id}>
-              <td>{i+1}</td>
+              <td>{i + 1}</td>
               <td>{t.name}</td>
               <td>{t.points}</td>
               <td>{t.goals_for}</td>

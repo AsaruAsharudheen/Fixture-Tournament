@@ -1,4 +1,3 @@
-// src/views/Admin.jsx
 import React, { useMemo, useState } from "react";
 import TeamInput from "../Components/TeamInput";
 import MatchCard from "../Components/MatchCard";
@@ -14,15 +13,12 @@ import { useTournamentData } from "../hooks/useTournamentData";
 import "./Admin.css";
 
 export default function Admin() {
-
-  // LOGIN STATE
   const [username, setUser] = useState("");
   const [password, setPass] = useState("");
   const [loginError, setLoginError] = useState("");
 
   const token = localStorage.getItem("token");
 
-  // TOURNAMENT STATE
   const { data, setData, load } = useTournamentData();
   const allTeams = [...data.groups.A, ...data.groups.B];
 
@@ -31,13 +27,12 @@ export default function Admin() {
     [allTeams]
   );
 
-  // LOGIN HANDLER
   const doLogin = async (e) => {
     e.preventDefault();
     const res = await login(username, password);
 
     if (!res.ok) {
-      setLoginError(res.body?.message || "Login Failed");
+      setLoginError(res.body?.message || "Invalid Login");
       return;
     }
 
@@ -45,38 +40,35 @@ export default function Admin() {
     window.location.reload();
   };
 
-  // CREATE GROUPS (8 TEAMS)
   const createGroups = async (teams) => {
     const res = await generateGroups(teams, token);
     if (!res.ok) return alert(res.body.message);
+
     setData(res.body.tournament);
   };
 
-  // UPDATE MATCH (scores, penalties, toss)
   const saveScore = async (payload) => {
     const res = await updateMatch(payload, token);
-
     if (!res.ok) return alert(res.body.message);
 
     if (res.body.tournament) setData(res.body.tournament);
     else load();
   };
 
-  // GENERATE SEMIS
   const makeSemis = async () => {
     const res = await generateSemifinals(token);
     if (!res.ok) return alert(res.body.message);
+
     setData(res.body.tournament);
   };
 
-  // GENERATE FINAL
   const makeFinal = async () => {
     const res = await generateFinal(token);
     if (!res.ok) return alert(res.body.message);
+
     setData(res.body.tournament);
   };
 
-  // LOGIN PAGE
   if (!token) {
     return (
       <div className="fixture-bg">
@@ -105,13 +97,12 @@ export default function Admin() {
     );
   }
 
-  // TEAM INPUT PAGE (8 teams)
   if (!allTeams.length) {
     return (
       <div className="fixture-bg">
         <div className="fixture-content admin-wrapper">
 
-          <h2 className="title">Add 8 Teams</h2>
+          <h2 className="title">Add 6 Teams</h2>
 
           <TeamInput onSubmit={createGroups} />
 
@@ -130,7 +121,6 @@ export default function Admin() {
     );
   }
 
-  // MAIN ADMIN DASHBOARD
   return (
     <div className="fixture-bg">
       <div className="fixture-content admin-wrapper">
@@ -153,13 +143,11 @@ export default function Admin() {
           </button>
         </div>
 
-        {/* GROUP TABLES */}
         <div className="group-row">
           <GroupStandings title="Group A" teams={data.groups.A} />
           <GroupStandings title="Group B" teams={data.groups.B} />
         </div>
 
-        {/* MATCHES */}
         <h2 className="section-title">Matches</h2>
         <div className="match-grid">
           {data.matches.map((m) => (
@@ -173,7 +161,6 @@ export default function Admin() {
           ))}
         </div>
 
-        {/* SEMIS */}
         <h2 className="section-title">Semifinals</h2>
         <div className="match-grid">
           {data.matches
@@ -189,7 +176,6 @@ export default function Admin() {
             ))}
         </div>
 
-        {/* FINAL */}
         <h2 className="section-title">Final</h2>
         <div className="match-grid">
           {data.matches

@@ -4,7 +4,6 @@ import "./MatchCard.css";
 export default function MatchCard({ match, teamsMap, onScoreSubmit, isAdmin }) {
   const [scoreA, setScoreA] = useState(match.scoreA ?? "");
   const [scoreB, setScoreB] = useState(match.scoreB ?? "");
-
   const [penA, setPenA] = useState(match.penaltyA ?? "");
   const [penB, setPenB] = useState(match.penaltyB ?? "");
 
@@ -13,11 +12,10 @@ export default function MatchCard({ match, teamsMap, onScoreSubmit, isAdmin }) {
 
   const knockout = match.group === "SEMIS" || match.group === "FINAL";
 
-  // Convert input safely to number
   const numA = scoreA === "" ? null : Number(scoreA);
   const numB = scoreB === "" ? null : Number(scoreB);
 
-  const isDraw = knockout && numA !== null && numB !== null && numA === numB;
+  const isDraw = knockout && numA === numB && numA !== null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +27,6 @@ export default function MatchCard({ match, teamsMap, onScoreSubmit, isAdmin }) {
       scoreB: numB,
     };
 
-    // Penalties only if knockout draw
     if (isDraw) {
       payload.penaltyA = penA === "" ? null : Number(penA);
       payload.penaltyB = penB === "" ? null : Number(penB);
@@ -45,8 +42,8 @@ export default function MatchCard({ match, teamsMap, onScoreSubmit, isAdmin }) {
         {match.startTime && <span>{match.startTime}</span>}
       </h4>
 
-      {/* SCORE INPUTS */}
       <form onSubmit={handleSubmit} className="score-form">
+
         <div className="score-row">
           <input
             type="number"
@@ -65,7 +62,6 @@ export default function MatchCard({ match, teamsMap, onScoreSubmit, isAdmin }) {
           />
         </div>
 
-        {/* PENALTIES ONLY IF DRAW */}
         {isDraw && (
           <div className="penalty-row">
             <input
@@ -89,7 +85,6 @@ export default function MatchCard({ match, teamsMap, onScoreSubmit, isAdmin }) {
         {isAdmin && <button type="submit">Save</button>}
       </form>
 
-      {/* WINNER DISPLAY */}
       {match.winner_id && (
         <div className="winner-banner">
           Winner: {teamsMap[match.winner_id]?.name}

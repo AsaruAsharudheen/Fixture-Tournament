@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./TeamInput.css";
 
 export default function TeamInput({ onSubmit }) {
-  const [names, setNames] = useState(Array(8).fill(""));
+  const [names, setNames] = useState(Array(6).fill(""));
 
   const handle = (i, v) => {
     const c = [...names];
@@ -13,17 +13,20 @@ export default function TeamInput({ onSubmit }) {
   const submit = (e) => {
     e.preventDefault();
     const list = names.map((n) => n.trim());
-    if (list.filter(Boolean).length !== 8) {
-      alert("Enter exactly 8 team names.");
+
+    if (list.filter(Boolean).length !== 6) {
+      alert("Enter exactly 6 team names.");
       return;
     }
-    const teams = list.map((name, i) => ({ id: `t${i+1}`, name }));
+
+    const teams = list.map((name, i) => ({ id: `t${i + 1}`, name }));
     onSubmit(teams);
   };
 
-  return <>
+  return (
     <form className="team-input" onSubmit={submit}>
-      <h3>Enter 8 Teams (4 teams Group A, 4 teams Group B)</h3>
+      <h3>Enter 6 Teams (3 in Group A, 3 in Group B)</h3>
+
       <div className="team-grid">
         {names.map((n, i) => (
           <input
@@ -34,8 +37,8 @@ export default function TeamInput({ onSubmit }) {
           />
         ))}
       </div>
+
       <button type="submit">Generate Tournament</button>
     </form>
-    </>
-  
+  );
 }

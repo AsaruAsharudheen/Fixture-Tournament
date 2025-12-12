@@ -3,7 +3,7 @@
 const BASE = import.meta.env.VITE_API_BASE;
 const AUTH = import.meta.env.VITE_AUTH_BASE;
 
-// Generic requester
+// ----- GENERIC REQUEST WRAPPER -----
 async function request(url, options = {}) {
   const res = await fetch(url, options);
   const text = await res.text();
@@ -15,11 +15,11 @@ async function request(url, options = {}) {
   }
 }
 
-// Get full tournament data
+// ----- GET TOURNAMENT -----
 export const fetchTournament = () =>
   request(`${BASE}`);
 
-// Create groups with 8 teams
+// ----- CREATE GROUPS -----
 export const generateGroups = (teams, token) =>
   request(`${BASE}/generate`, {
     method: "POST",
@@ -30,7 +30,7 @@ export const generateGroups = (teams, token) =>
     body: JSON.stringify({ teams }),
   });
 
-// Update match (supports penalties)
+// ----- UPDATE MATCH -----
 export const updateMatch = (payload, token) =>
   request(`${BASE}/update-match`, {
     method: "POST",
@@ -41,25 +41,21 @@ export const updateMatch = (payload, token) =>
     body: JSON.stringify(payload),
   });
 
-// Generate semifinals
+// ----- GENERATE SEMIFINALS -----
 export const generateSemifinals = (token) =>
   request(`${BASE}/generate-semifinals`, {
     method: "POST",
-    headers: {
-      "x-auth-token": token,
-    },
+    headers: { "x-auth-token": token },
   });
 
-// Generate final
+// ----- GENERATE FINAL -----
 export const generateFinal = (token) =>
   request(`${BASE}/generate-final`, {
     method: "POST",
-    headers: {
-      "x-auth-token": token,
-    },
+    headers: { "x-auth-token": token },
   });
 
-// Login admin
+// ----- LOGIN -----
 export const login = (username, password) =>
   request(`${AUTH}/login`, {
     method: "POST",

@@ -14,3 +14,122 @@
 .match-grid{ margin-top:8px; }
 .err{ color:var(--danger); }
 .msg{ color:var(--success); margin-bottom:8px; }
+/* ============================================
+   ADMIN PAGE WRAPPER
+============================================ */
+.admin-wrapper {
+  max-width: 420px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.25);
+}
+
+/* PAGE HEADING */
+.admin-wrapper .title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+/* ============================================
+   LOGIN BOX
+============================================ */
+.login-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.login-box input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.45);
+  background: rgba(255,255,255,0.28);
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+}
+
+.login-box input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.login-box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 4px;
+  background: var(--primary);
+  border: 0;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.login-box button:hover {
+  transform: translateY(-2px);
+  background: #0c8e8c;
+}
+
+/* ============================================
+   ERROR TEXT
+============================================ */
+.err {
+  margin-top: 10px;
+  color: #ffb3b3;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* SUCCESS TEXT */
+.msg {
+  color: #b8ffcf;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* ============================================
+    MOBILE RESPONSIVE
+============================================ */
+@media (max-width: 700px) {
+  .admin-wrapper {
+    width: 92%;
+    margin-top: 40px;
+    padding: 16px;
+  }
+
+  .login-box {
+    padding: 16px;
+    gap: 10px;
+  }
+
+  .admin-wrapper .title {
+    font-size: 22px;
+  }
+
+  .login-box input {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .login-box button {
+    padding: 10px;
+    font-size: 15px;
+  }
+}

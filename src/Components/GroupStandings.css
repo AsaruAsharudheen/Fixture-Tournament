@@ -1,0 +1,43 @@
+/* ============================================================
+   DEFAULT STANDINGS (Used in Admin Page)
+============================================================ */
+.standings {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #eef2f7;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  width: 100%;
+  color: #0f172a;
+}
+
+.standings h3 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.standings table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.standings th,
+.standings td {
+  padding: 8px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+  color: #111;
+}
+
+.standings th {
+  font-weight: 700;
+  color: #4b5563;
+}
+
+.standings td:first-child {
+  width: 30px;
+  font-weight: 700;
+  color: #0f172a;
+}

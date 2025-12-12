@@ -1,0 +1,545 @@
+/* src/index.css - Global styles */
+:root{
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: #1f2937;
+  --primary: #0ea5a4;
+  --success: #16a34a;
+  --danger: #ef4444;
+  --glass: rgba(255,255,255,0.6);
+  --shadow: 0 6px 20px rgba(16,24,40,0.06);
+  --radius: 10px;
+  --container: 1100px;
+  --gap: 12px;
+  --font: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  font-family:var(--font);
+  background:var(--bg);
+  color:#0f172a;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+
+/* app container */
+.app{
+  max-width:var(--container);
+  /* margin:24px auto; */
+  padding:18px;
+}
+
+/* top nav */
+.top-nav{
+  display:flex;
+  gap:10px;
+  margin-bottom:18px;
+}
+.top-nav a{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:8px;
+  background:var(--accent);
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+}
+.top-nav a.active{ background:#fff; color:var(--accent); border:1px solid #e6e9ee; }
+
+/* content card style */
+.content, .fixture-page, .admin-page {
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:18px;
+}
+
+/* headings */
+h1,h2,h3,h4{ margin:8px 0; font-weight:700; color:#0f172a }
+
+/* reusable buttons */
+button{
+  cursor:pointer;
+  border:0;
+  padding:8px 12px;
+  border-radius:8px;
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+}
+button.secondary{
+  background:#fff;
+  color:var(--accent);
+  border:1px solid #e6e9ee;
+}
+button.ghost{
+  background:transparent; color:var(--accent); border:1px dashed #e6e9ee;
+}
+
+/* utility containers */
+.group-row{ display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap; margin-bottom:18px; }
+.match-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-bottom:20px; }
+
+/* small text */
+.muted{ color:var(--muted); font-size:13px }
+
+/* responsive */
+@media (max-width: 880px){
+  .group-row{ flex-direction:column; }
+}
+.match-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+
+
+/* =======================================================================
+   🌎 GLOBAL VARIABLES
+   ======================================================================= */
+:root{
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: #1f2937;
+  --primary: #0ea5a4;
+  --success: #16a34a;
+  --danger: #ef4444;
+  --glass: rgba(255,255,255,0.35);
+  --shadow: 0 6px 20px rgba(16,24,40,0.06);
+  --radius: 12px;
+  --container: 1100px;
+  --gap: 14px;
+  --font: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+*{ box-sizing:border-box; }
+html, body, #root { height:100%; margin:0; padding:0; }
+body {
+  background: var(--bg);
+  font-family: var(--font);
+  color:#0f172a;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* =======================================================================
+   🧭 TOP NAVIGATION
+   ======================================================================= */
+.app {
+  max-width: var(--container);
+  /* margin: 24px auto; */
+  padding: 18px;
+}
+.top-nav {
+  display:flex;
+  gap:12px;
+  margin-bottom:18px;
+}
+.top-nav button {
+  padding:8px 16px;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  border:1px solid #222;
+  background:#222;
+  color:#fff;
+}
+.top-nav button.active {
+  background:#fff;
+  color:#222;
+}
+
+/* =======================================================================
+   📄 CONTENT WRAPPERS
+   ======================================================================= */
+.content,
+.admin-page {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+/* ❌ Fixture page must NOT be white */
+.fixture-page {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* =======================================================================
+   🏟️ FIXTURE BACKGROUND
+   ======================================================================= */
+.fixture-bg {
+  min-height: 100vh;
+  background-image: url("/download.png");
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Dark overlay */
+.fixture-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(2px);
+  z-index: 1;
+}
+
+.fixture-content {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  color:white;
+}
+
+/* =======================================================================
+   🎨 FIXTURE HEADINGS (White)
+   ======================================================================= */
+.fixture-content h1,
+.fixture-content h2,
+.fixture-content h3,
+.fixture-content h4,
+.fixture-content .section-title,
+.fixture-content .title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.45);
+}
+
+/* =======================================================================
+   📊 GROUP STANDINGS
+   ======================================================================= */
+.standings {
+  background: rgba(255,255,255,0.15);
+  border-radius: var(--radius);
+  padding: 14px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.22);
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.standings h4 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: white !important;
+}
+
+.standings table { width:100%; border-collapse:collapse; }
+.standings th, 
+.standings td {
+  padding: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  color: white !important;
+}
+
+.standings th { font-size:13px; opacity:0.8; }
+.standings td:first-child { width:30px; font-weight:700; }
+
+/* Group row layout */
+.group-row {
+  display:flex;
+  gap:16px;
+  margin-bottom:20px;
+}
+@media (max-width:700px){
+  .group-row { flex-direction:column; }
+}
+
+/* =======================================================================
+   🎫 MATCH CARDS
+   ======================================================================= */
+.match-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.match-card {
+  background: rgba(255,255,255,0.15);
+  border-radius: var(--radius);
+  padding: 14px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.22);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+  color:#fff;
+}
+
+.match-card .match-header {
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-size: 16px;
+  display:flex;
+  justify-content:space-between;
+}
+
+/* Winner highlight */
+.winner-banner {
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  text-align:center;
+  background: rgba(22,163,74,0.28);
+  color:#b9ffd0;
+  font-weight:700;
+}
+
+/* Score inputs */
+.score-row input,
+.penalty-row input {
+  width: 60px;
+  padding: 8px;
+  border-radius: 8px;
+  border:1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.2);
+  color:white;
+  text-align:center;
+}
+
+.score-row {
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:center;
+}
+
+.penalty-row {
+  margin-top:10px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Save button */
+.score-form button {
+  margin-top:10px;
+  width:100%;
+  padding:8px;
+  border-radius:8px;
+  background:var(--primary);
+  color:white;
+  font-weight:700;
+  border:0;
+}
+
+/* =======================================================================
+   🧑‍💼 ADMIN PAGE
+   ======================================================================= */
+.admin-controls {
+  display:flex;
+  gap:12px;
+  margin-bottom:14px;
+}
+.admin-controls button {
+  padding:8px 14px;
+  border-radius:8px;
+}
+
+/* =======================================================================
+   TEAM INPUT
+   ======================================================================= */
+.team-input {
+  background: var(--card);
+  padding:16px;
+  border-radius:var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.team-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+.team-grid input {
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #dce1e9;
+}
+
+@media(max-width:700px){
+  .team-grid { grid-template-columns:repeat(2,1fr); }
+}
+/* =======================================================================
+   📱 MOBILE RESPONSIVE FIXES (FULL WIDTH + PERFECT BACKGROUND)
+   ======================================================================= */
+
+/* Ensure fixture container uses full width on mobile */
+@media (max-width: 700px) {
+
+  .fixture-bg {
+    background-position: center;
+    background-size: cover;
+    padding: 0;
+    min-height: 100vh;
+
+  }
+
+  .fixture-content {
+    padding: 12px !important;
+  }
+
+  /* Make all cards full width */
+  .match-card,
+  .standings {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+  }
+
+  /* Reduce inside spacing */
+  .match-card {
+    padding: 12px !important;
+  }
+
+  /* Headings responsive */
+  .fixture-content h1 {
+    font-size: 24px !important;
+    text-align: center;
+  }
+
+  .fixture-content h2 {
+    font-size: 20px !important;
+    text-align: center;
+  }
+
+  /* Group standings spacing */
+  .group-row {
+    flex-direction: column !important;
+    padding: 0;
+    gap: 12px !important;
+  }
+
+  /* Improve table readability */
+  .standings table {
+    font-size: 13px !important;
+  }
+
+  /* Match schedule gap */
+  .match-list {
+    gap: 12px !important;
+  }
+
+  /* Reduce score input width for smaller screens */
+  .score-row input,
+  .penalty-row input {
+    width: 48px !important;
+  }
+
+  /* Penalty row better spacing */
+  .penalty-row {
+    gap: 6px !important;
+  }
+}
+
+/* Slightly larger tablets */
+@media (max-width: 900px) {
+  .fixture-content {
+    padding: 18px;
+  }
+}
+/* ============================================================
+   TEAM INPUT — GLASS UI (Matches Fixture Theme)
+============================================================ */
+.team-input {
+  width: 100%;
+  padding: 18px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.28);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+  color: white;
+}
+
+.team-input h3 {
+  margin-bottom: 14px;
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.35);
+}
+
+/* Grid for team inputs */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* Input styling */
+.team-grid input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.22);
+  color: white;
+  font-size: 15px;
+  outline: none;
+  text-align: center;
+}
+
+.team-grid input::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+/* Focus glow effect */
+.team-grid input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(14,165,164,0.22);
+}
+
+/* Submit button */
+.team-input button {
+  margin-top: 6px;
+  background: var(--primary);
+  padding: 10px 18px;
+  font-size: 15px;
+  color: white;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  transition: 0.2s ease;
+}
+
+.team-input button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.3);
+}
+
+/* ============================================================
+   MOBILE RESPONSIVE (Perfect layout)
+============================================================ */
+@media (max-width: 700px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .team-input {
+    padding: 14px;
+  }
+
+  .team-input button {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+}

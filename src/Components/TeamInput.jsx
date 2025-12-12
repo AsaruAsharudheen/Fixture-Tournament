@@ -1,37 +1,43 @@
-// src/components/TeamInput.jsx
 import React, { useState } from "react";
-import "./teaminput.css";
+import "./TeamInput.css";
 
-const TeamInput = ({ onSubmit }) => {
+export default function TeamInput({ onSubmit }) {
   const [names, setNames] = useState(Array(8).fill(""));
 
-  const change = (i, v) => {
-    const c = [...names]; c[i] = v; setNames(c);
+  const handle = (i, v) => {
+    const c = [...names];
+    c[i] = v;
+    setNames(c);
   };
 
   const submit = (e) => {
     e.preventDefault();
-    const filled = names.map(n => n.trim()).filter(Boolean);
-    if (filled.length !== 8) {
-      alert("Please enter exactly 8 team names (no blanks).");
+    const list = names.map((n) => n.trim());
+    if (list.filter(Boolean).length !== 8) {
+      alert("Enter exactly 8 team names.");
       return;
     }
-    // convert to objects expected by backend: { id, name }
-    const teams = names.map((n, i) => ({ id: `t${i+1}`, name: n }));
+    const teams = list.map((name, i) => ({ id: `t${i+1}`, name }));
     onSubmit(teams);
   };
 
-  return (
+  return <>
+   <div className="fixture-bg">
     <form className="team-input" onSubmit={submit}>
-      <h3>Enter 8 teams (Group A: first 4, Group B: next 4)</h3>
+      <h3>Enter 8 Teams (4 teams Group A, 4 teams Group B)</h3>
       <div className="team-grid">
-        {names.map((nm, i) => (
-          <input key={i} value={nm} onChange={(e) => change(i, e.target.value)} placeholder={`Team ${i+1}`} />
+        {names.map((n, i) => (
+          <input
+            key={i}
+            value={n}
+            onChange={(e) => handle(i, e.target.value)}
+            placeholder={`Team ${i + 1}`}
+          />
         ))}
       </div>
-      <button type="submit">Generate Groups & Matches</button>
+      <button type="submit">Generate Tournament</button>
     </form>
-  );
-};
-
-export default TeamInput;
+    </div>
+    </>
+  
+}

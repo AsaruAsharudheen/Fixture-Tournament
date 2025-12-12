@@ -1,54 +1,101 @@
-// src/components/MatchCard.jsx
 import React, { useState } from "react";
-import "./matchcard.css";
+import "./MatchCard.css";
 
-const MatchCard = ({ match, teamsMap = {}, onAdminSubmit, isAdmin=false }) => {
-  const [a, setA] = useState(match.scoreA ?? "");
-  const [b, setB] = useState(match.scoreB ?? "");
-  const teamA = match.teamA_id ? teamsMap[match.teamA_id] : null;
-  const teamB = match.teamB_id ? teamsMap[match.teamB_id] : null;
-  const completed = match.scoreA !== null && match.scoreB !== null;
+export default function MatchCard({ match, teamsMap, onScoreSubmit, isAdmin }) {
+  const [scoreA, setScoreA] = useState(match.scoreA ?? "");
+  const [scoreB, setScoreB] = useState(match.scoreB ?? "");
 
-  const submit = (e) => {
+  const [penA, setPenA] = useState(match.penaltyA ?? "");
+  const [penB, setPenB] = useState(match.penaltyB ?? "");
+
+  const teamA = teamsMap[match.teamA_id];
+  const teamB = teamsMap[match.teamB_id];
+
+  const knockout = match.group === "SEMIS" || match.group === "FINAL";
+
+  // Convert input safely to number
+  const numA = scoreA === "" ? null : Number(scoreA);
+  const numB = scoreB === "" ? null : Number(scoreB);
+
+  const isDraw = knockout && numA !== null && numB !== null && numA === numB;
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const sA = Number(a);
-    const sB = Number(b);
-    if (!Number.isFinite(sA) || !Number.isFinite(sB)) return alert("Enter valid scores");
-    // In knockout we might forbid draws; for group stage draws allowed. Backend uses points: win=2 draw=1
-    onAdminSubmit(match.id, sA, sB);
+    if (!isAdmin) return;
+
+    const payload = {
+      matchId: match.id,
+      scoreA: numA,
+      scoreB: numB,
+    };
+
+    // Penalties only if knockout draw
+    if (isDraw) {
+      payload.penaltyA = penA === "" ? null : Number(penA);
+      payload.penaltyB = penB === "" ? null : Number(penB);
+    }
+
+    onScoreSubmit(payload);
   };
 
   return (
-    <div className={`match-card ${completed ? "done": ""}`}>
-      <div className="match-head">{match.group || match.round || "GRP"} - #{match.match_num}</div>
-      <div className="match-body">
-        <div className={`team ${match.winner_id === match.teamA_id ? "winner" : ""}`}>
-          {teamA ? teamA.name : "TBD"}
+    <div className={`match-card ${match.winner_id ? "completed" : ""}`}>
+      <h4 className="match-header">
+        {teamA?.name} vs {teamB?.name}
+        {match.startTime && <span>{match.startTime}</span>}
+      </h4>
+
+      {/* SCORE INPUTS */}
+      <form onSubmit={handleSubmit} className="score-form">
+        <div className="score-row">
+          <input
+            type="number"
+            value={scoreA}
+            min="0"
+            onChange={(e) => setScoreA(e.target.value)}
+            disabled={!isAdmin}
+          />
+          <span>-</span>
+          <input
+            type="number"
+            value={scoreB}
+            min="0"
+            onChange={(e) => setScoreB(e.target.value)}
+            disabled={!isAdmin}
+          />
         </div>
 
-        {isAdmin && !completed && teamA && teamB ? (
-          <form className="score-form" onSubmit={submit}>
-            <input type="number" min="0" value={a} onChange={(e)=>setA(e.target.value)} />
-            <span> - </span>
-            <input type="number" min="0" value={b} onChange={(e)=>setB(e.target.value)} />
-            <button type="submit">Save</button>
-          </form>
-        ) : (
-          <div className="score-display">
-            {match.scoreA != null ? `${match.scoreA} - ${match.scoreB}` : "vs"}
+        {/* PENALTIES ONLY IF DRAW */}
+        {isDraw && (
+          <div className="penalty-row">
+            <input
+              type="number"
+              placeholder="Pen A"
+              value={penA}
+              min="0"
+              onChange={(e) => setPenA(e.target.value)}
+            />
+            <span>pen</span>
+            <input
+              type="number"
+              placeholder="Pen B"
+              value={penB}
+              min="0"
+              onChange={(e) => setPenB(e.target.value)}
+            />
           </div>
         )}
 
-        <div className={`team ${match.winner_id === match.teamB_id ? "winner" : ""}`}>
-          {teamB ? teamB.name : "TBD"}
-        </div>
-      </div>
+        {isAdmin && <button type="submit">Save</button>}
+      </form>
 
-      {completed && match.winner_id && (
-        <div className="match-winner">Winner: {teamsMap[match.winner_id]?.name ?? "TBD"}</div>
+      {/* WINNER DISPLAY */}
+      {match.winner_id && (
+        <div className="winner-banner">
+          Winner: {teamsMap[match.winner_id]?.name}
+          {match.tossWinner ? " (Toss Winner)" : ""}
+        </div>
       )}
     </div>
   );
-};
-
-export default MatchCard;
+}

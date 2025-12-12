@@ -1,63 +1,102 @@
-// src/pages/Fixture.jsx
+// src/views/Fixture.jsx
 import React, { useMemo } from "react";
 import { useTournamentData } from "../hooks/useTournamentData";
 import MatchCard from "../Components/MatchCard";
 import GroupStandings from "../Components/GroupStandings";
-// import "./fixture.css";
+import "./Fixture.css";
 
-const Fixture = () => {
+export default function Fixture() {
+
   const { data, loading, error } = useTournamentData();
+
   const teams = [...(data.groups?.A || []), ...(data.groups?.B || [])];
-  const teamsMap = useMemo(() => teams.reduce((a,t)=>{ a[t.id]=t; return a; }, {}), [teams]);
+
+  const teamsMap = useMemo(() => {
+    return teams.reduce((acc, t) => {
+      acc[t.id] = t;
+      return acc;
+    }, {});
+  }, [teams]);
+
+  const matchOrder = data.matches || [];
 
   if (loading) return <div className="fixture-page">Loading...</div>;
-  if (error) return <div className="fixture-page error">Error: {error}</div>;
+  if (error) return <div className="fixture-page">Error loading data</div>;
+  if (!teams.length) return <div className="fixture-page">Tournament not set up</div>;
 
-  const groupA = data.groups.A || [];
-  const groupB = data.groups.B || [];
-  const groupAMatches = (data.matches || []).filter(m => m.group === "A");
-  const groupBMatches = (data.matches || []).filter(m => m.group === "B");
-  const semis = (data.matches || []).filter(m => m.group === "SEMIS");
-  const finalM = (data.matches || []).filter(m => m.group === "FINAL");
+  // TIME CREATION
+  const startHour = 21;
+  const slotTime = 20 + 10; // 20 mins match + 10 mins gap
+
+  const getTime = (i) => {
+    const total = startHour * 60 + slotTime * i;
+    const h = Math.floor(total / 60) % 24;
+    const m = total % 60;
+    const ampm = h >= 12 ? "PM" : "AM";
+    const hh = h > 12 ? h - 12 : h === 0 ? 12 : h;
+    return `${hh}:${String(m).padStart(2, "0")} ${ampm}`;
+  };
 
   return (
-    <div className="fixture-page">
-      <h1>Tournament Fixture</h1>
+    <div className="fixture-bg">
+      <div className="fixture-content">
 
-      <div className="top-section">
-        <GroupStandings title="Group A" teams={groupA} />
-        <GroupStandings title="Group B" teams={groupB} />
+        <h1 className="title">⚽ Tournament Fixtures</h1>
+
+        {/* GROUP STANDINGS */}
+        <div className="group-row">
+          <GroupStandings title="Group A" teams={data.groups.A} />
+          <GroupStandings title="Group B" teams={data.groups.B} />
+        </div>
+
+        {/* MATCHES */}
+        <h2 className="section-title">Match Schedule</h2>
+        <div className="match-list">
+          {matchOrder.map((match, index) => (
+            <MatchCard
+              key={match.id}
+              match={{
+                ...match,
+                startTime: getTime(index),
+                ground: match.group,
+              }}
+              teamsMap={teamsMap}
+              isAdmin={false}
+            />
+          ))}
+        </div>
+
+        {/* SEMIFINALS */}
+        <h2 className="section-title">Semifinals</h2>
+        <div className="match-list">
+          {data.matches
+            .filter((m) => m.group === "SEMIS")
+            .map((m) => (
+              <MatchCard
+                key={m.id}
+                match={m}
+                teamsMap={teamsMap}
+                isAdmin={false}
+              />
+            ))}
+        </div>
+
+        {/* FINAL */}
+        <h2 className="section-title">Final</h2>
+        <div className="match-list">
+          {data.matches
+            .filter((m) => m.group === "FINAL")
+            .map((m) => (
+              <MatchCard
+                key={m.id}
+                match={m}
+                teamsMap={teamsMap}
+                isAdmin={false}
+              />
+            ))}
+        </div>
+
       </div>
-
-      <section>
-        <h2>Group A Matches</h2>
-        <div className="fixtures-grid">
-          {groupAMatches.map(m => <MatchCard key={m.id} match={m} teamsMap={teamsMap} />)}
-        </div>
-      </section>
-
-      <section>
-        <h2>Group B Matches</h2>
-        <div className="fixtures-grid">
-          {groupBMatches.map(m => <MatchCard key={m.id} match={m} teamsMap={teamsMap} />)}
-        </div>
-      </section>
-
-      <section>
-        <h2>Semifinals</h2>
-        <div className="fixtures-grid">
-          {semis.map(m => <MatchCard key={m.id} match={m} teamsMap={teamsMap} />)}
-        </div>
-      </section>
-
-      <section>
-        <h2>Final</h2>
-        <div className="fixtures-grid">
-          {finalM.map(m => <MatchCard key={m.id} match={m} teamsMap={teamsMap} />)}
-        </div>
-      </section>
     </div>
   );
-};
-
-export default Fixture;
+}

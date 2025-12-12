@@ -4,13 +4,13 @@ import Admin from "./pages/Admin";
 
 export default function App() {
   return (
-    <div className="app-container">
+    <div className="app">
       <nav className="top-nav">
         <Link to="/">Fixture</Link>
-        <Link to="/admin">Admin Panel</Link>
+        <Link to="/admin">Admin</Link>
       </nav>
 
-      <main className="content-view">
+      <main className="content">
         <Routes>
           <Route path="/" element={<Fixture />} />
           <Route path="/admin" element={<Admin />} />

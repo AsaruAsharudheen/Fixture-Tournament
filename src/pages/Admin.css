@@ -1,0 +1,16 @@
+/* src/pages/Admin.css (helpers used in Admin.jsx) */
+.admin-page{ padding:14px; }
+.admin-controls{ display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
+.login-box{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  background:linear-gradient(180deg,#fff,#fbfdff);
+  padding:10px; border-radius:8px; border:1px solid #edf2f7; margin-bottom:12px;
+}
+.login-box input{ padding:8px 10px; border-radius:8px; border:1px solid #e6e9ee; }
+.login-box button{ background:var(--primary); border-radius:8px; padding:8px 10px; color:#fff; border:0; }
+
+.match-grid{ margin-top:8px; }
+.err{ color:var(--danger); }
+.msg{ color:var(--success); margin-bottom:8px; }

@@ -1,0 +1,17 @@
+/* ============================================================
+   GLASS STANDINGS (Fixture Page Only)
+============================================================ */
+.fixture-content .standings {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: white !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+
+.fixture-content .standings th,
+.fixture-content .standings td,
+.fixture-content .standings h3 {
+  color: white !important;
+  border-color: rgba(255,255,255,0.2);
+}
